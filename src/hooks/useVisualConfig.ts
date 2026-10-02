@@ -430,6 +430,7 @@ export function parseRoutingStrategy(raw: unknown): RoutingStrategy {
   const normalized = String(raw ?? '')
     .trim()
     .toLowerCase();
+  if (normalized === '' || normalized === 'earliest-reset') return 'earliest-reset';
   if (['weighted-round-robin', 'weightedroundrobin', 'wrr'].includes(normalized)) {
     return 'weighted-round-robin';
   }

@@ -213,7 +213,8 @@
     "ws_auth_enable": "Требовать аутентификацию для /ws/*",
     "routing_strategy_round_robin": "round-robin (цикл)",
     "routing_strategy_weighted_round_robin": "weighted-round-robin (взвешенный цикл)",
-    "routing_strategy_fill_first": "fill-first (приоритет)"
+    "routing_strategy_fill_first": "fill-first (приоритет)",
+    "routing_strategy_earliest_reset": "Ближайший сброс"
   },
   "auth_files": {
     "title": "Управление файлами авторизации",
@@ -1386,7 +1387,7 @@
           "gpt_image_2_base_model": "Базовая модель GPT Image 2",
           "gpt_image_2_base_model_hint": "Основная модель для проксирования gpt-image-2 image-запросов; если пусто или неверно, backend использует значение по умолчанию",
           "routing_strategy": "Стратегия маршрутизации",
-          "routing_strategy_hint": "Выберите стратегию подбора учётных данных",
+          "routing_strategy_hint": "Стратегия «Ближайший сброс» предпочитает аккаунты с ближайшим сбросом недельной квоты. Без даты сброса используется ротация.",
           "strategy_round_robin": "По кругу",
           "strategy_weighted_round_robin": "Взвешенный круговой алгоритм",
           "strategy_fill_first": "Сначала заполнить",
@@ -1399,7 +1400,8 @@
           "disable_cooling_desc": "Глобально отключить окна охлаждения auth/model после ошибок",
           "session_affinity": "Маршрутизация с привязкой к сессии",
           "ws_auth": "Аутентификация WebSocket",
-          "ws_auth_desc": "Аутентификация WebSocket AI Studio (oauth.providers.aistudio.ws-auth)"
+          "ws_auth_desc": "Аутентификация WebSocket AI Studio (oauth.providers.aistudio.ws-auth)",
+          "strategy_earliest_reset": "Ближайший сброс"
         },
         "quota": {
           "title": "Резерв по квоте",
@@ -1586,7 +1588,16 @@
     "weekday_wed": "Ср",
     "weekday_thu": "Чт",
     "weekday_fri": "Пт",
-    "weekday_sat": "Сб"
+    "weekday_sat": "Сб",
+    "view_ledger": "Список",
+    "view_cards": "Карточки",
+    "view_label": "Вид квот",
+    "show_emails": "Показать почту",
+    "hide_emails": "Скрыть почту",
+    "weekly_limit": "Недельный лимит",
+    "summary_total": "из {{total}}%",
+    "summary_credentials": "{{count}} аккаунтов",
+    "next_reset": "Следующий сброс"
   },
   "plugin_management": {
     "title": "Управление плагинами",

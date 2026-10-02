@@ -1,11 +1,5 @@
 @use '../../../styles/mixins' as *;
 
-/* ============================================================
- * 额度卡片 — 继承凭证卡 statTile 配方（14px 圆角 / 1px 边框 / 82% 透感纸面）。
- * 提供商身份只由图标承载（混合网格下五色渐变卡底会互相打架，已退役）。
- * 遥测内容一律 mono + tabular-nums。
- * ============================================================ */
-
 .card {
   position: relative;
   display: flex;
@@ -29,7 +23,6 @@
   }
 }
 
-/* 首次数据到达时的一次性级联入场；切 tab / 翻页 / 刷新不重播 */
 .cardEnter {
   animation: quota-card-in 0.45s var(--ease-out-strong, ease-out) both;
   animation-delay: var(--card-delay, 0s);
@@ -41,8 +34,6 @@
     transform: translate3d(0, 16px, 0);
   }
 }
-
-/* ---------- 头部：品牌图标 + 文件名 ---------- */
 
 .head {
   display: flex;
@@ -85,16 +76,12 @@
   @include text-ellipsis;
 }
 
-/* ---------- body 容器 ---------- */
-
 .body {
   display: flex;
   flex-direction: column;
   gap: 9px;
   min-width: 0;
 }
-
-/* ---------- idle：整块 body 即点击加载的落点 ---------- */
 
 .idleBody {
   display: flex;
@@ -150,8 +137,6 @@
   text-align: center;
 }
 
-/* ---------- loading：双幽灵行骨架 ---------- */
-
 .skeleton {
   display: flex;
   flex-direction: column;
@@ -165,7 +150,6 @@
   gap: 6px;
 }
 
-/* 骨架：底色 + 一道 1.2s 匀速扫光（linear —— 环境性匀速运动的唯一例外） */
 .skeletonLabel,
 .skeletonTrack {
   display: block;
@@ -226,8 +210,6 @@
   overflow-wrap: anywhere;
 }
 
-/* ---------- footer 动作 ---------- */
-
 .actionRow {
   display: flex;
   justify-content: flex-end;
@@ -235,7 +217,6 @@
   flex-wrap: wrap;
 }
 
-/* 安静描边药丸（与凭证卡图标动作同族：hover 才显色块） */
 .actionPill {
   display: inline-flex;
   align-items: center;
@@ -306,5 +287,91 @@
   .skeletonTrack,
   .spinning {
     animation: none;
+  }
+}
+
+// Ledger rows keep quota values in aligned columns without card borders.
+.ledgerRow {
+  display: grid;
+  grid-template-columns: minmax(190px, 1.1fr) minmax(0, 2.7fr) minmax(110px, auto);
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0;
+  border: 0;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+
+  &:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .head {
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+  .body {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 24px;
+    padding: 0;
+    min-width: 0;
+  }
+  .actionRow {
+    padding: 0;
+    border: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  .actionPill {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 4px 0;
+  }
+  .idleBody,
+  .errorStrip,
+  .skeleton {
+    grid-column: 1 / -1;
+  }
+  .spinning,
+  .skeletonLabel,
+  .skeletonTrack {
+    animation: none;
+    background-image: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .ledgerRow {
+    grid-template-columns: minmax(160px, 1fr) minmax(0, 2fr);
+    gap: 16px;
+    .body {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .actionRow {
+      grid-column: 2;
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .ledgerRow {
+    grid-template-columns: minmax(0, 1fr);
+    .body {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .actionRow {
+      grid-column: 1;
+      justify-content: flex-start;
+    }
   }
 }

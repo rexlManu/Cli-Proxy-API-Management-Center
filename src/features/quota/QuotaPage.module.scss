@@ -1,9 +1,5 @@
 @use '../../styles/mixins' as *;
 
-/* ============================================================
- * 额度页壳层：纯布局，视觉细节都在各组件的 colocated 模块里。
- * ============================================================ */
-
 .page {
   display: flex;
   flex-direction: column;
@@ -12,16 +8,12 @@
   min-width: 0;
 }
 
-/* ---------- 工作区（tabs + 网格 + 分页） ---------- */
-
 .workbench {
   display: flex;
   flex-direction: column;
   gap: 14px;
   min-width: 0;
 }
-
-/* 提供商导航独占一行，保留原生横向滚动。 */
 
 .tabsRow {
   display: flex;
@@ -183,18 +175,12 @@
   overflow-wrap: anywhere;
 }
 
-/* ---------- 卡片网格 ----------
- * 列宽由 CSS 决定（不再用 JS 测量）：额度卡承载水位条，取 340px 下限，
- * 与认证文件页配额模式（.gridQuota）同一档。 */
-
 .grid {
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   align-items: stretch;
 }
-
-/* ---------- 分页 ---------- */
 
 .pagination {
   display: flex;
@@ -217,4 +203,29 @@
   .page {
     gap: 16px;
   }
+}
+
+.ledger {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.providerHeading {
+  margin: 28px 0 0;
+  font-size: 15px;
+  font-weight: 650;
+}
+.providerHeading span {
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.page .staticLoading {
+  animation: none;
+  background: var(--border-color);
+}
+.grid > div > article {
+  height: 100%;
 }

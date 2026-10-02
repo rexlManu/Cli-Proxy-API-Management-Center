@@ -214,7 +214,8 @@
     "ws_auth_enable": "啟用 /ws/* 驗證",
     "routing_strategy_round_robin": "round-robin（輪詢）",
     "routing_strategy_weighted_round_robin": "weighted-round-robin（加權輪詢）",
-    "routing_strategy_fill_first": "fill-first（優先填充）"
+    "routing_strategy_fill_first": "fill-first（優先填充）",
+    "routing_strategy_earliest_reset": "最早重設"
   },
   "auth_files": {
     "title": "驗證檔案管理",
@@ -1407,7 +1408,7 @@
           "gpt_image_2_base_model": "GPT Image 2 基礎模型",
           "gpt_image_2_base_model_hint": "代理 gpt-image-2 圖片請求時使用的主線模型；留空或非法時後端使用預設值",
           "routing_strategy": "路由策略",
-          "routing_strategy_hint": "選擇憑證選擇策略",
+          "routing_strategy_hint": "最早重設策略優先使用每週額度更早重設的帳戶。重設時間未知時輪詢。",
           "strategy_round_robin": "輪詢（Round Robin）",
           "strategy_weighted_round_robin": "加權輪詢（Weighted Round Robin）",
           "strategy_fill_first": "填充優先（Fill First）",
@@ -1420,7 +1421,8 @@
           "disable_cooling_desc": "全域停用驗證/模型失敗後的冷卻視窗",
           "session_affinity": "會話黏性路由",
           "ws_auth": "WebSocket 驗證",
-          "ws_auth_desc": "啟用 AI Studio WebSocket 連線驗證（oauth.providers.aistudio.ws-auth）"
+          "ws_auth_desc": "啟用 AI Studio WebSocket 連線驗證（oauth.providers.aistudio.ws-auth）",
+          "strategy_earliest_reset": "最早重設"
         },
         "quota": {
           "title": "配額回退",
@@ -1607,7 +1609,16 @@
     "weekday_wed": "三",
     "weekday_thu": "四",
     "weekday_fri": "五",
-    "weekday_sat": "六"
+    "weekday_sat": "六",
+    "view_ledger": "明細",
+    "view_cards": "卡片",
+    "view_label": "額度檢視",
+    "show_emails": "顯示信箱",
+    "hide_emails": "隱藏信箱",
+    "weekly_limit": "每週限額",
+    "summary_total": "共 {{total}}%",
+    "summary_credentials": "{{count}} 個憑證",
+    "next_reset": "下次重設"
   },
   "plugin_management": {
     "title": "插件管理",

@@ -214,7 +214,8 @@
     "ws_auth_enable": "Require auth for /ws/*",
     "routing_strategy_round_robin": "round-robin (cycle)",
     "routing_strategy_weighted_round_robin": "weighted-round-robin (weighted cycle)",
-    "routing_strategy_fill_first": "fill-first (prioritize)"
+    "routing_strategy_fill_first": "fill-first (prioritize)",
+    "routing_strategy_earliest_reset": "Earliest reset"
   },
   "auth_files": {
     "title": "Auth Files Management",
@@ -1383,7 +1384,7 @@
           "gpt_image_2_base_model": "GPT Image 2 Base Model",
           "gpt_image_2_base_model_hint": "Mainline model used when proxying gpt-image-2 image requests; backend uses its default when empty or invalid",
           "routing_strategy": "Routing Strategy",
-          "routing_strategy_hint": "Select credential selection strategy",
+          "routing_strategy_hint": "Earliest reset prefers accounts whose weekly quota resets sooner. Unknown reset times use round-robin.",
           "strategy_round_robin": "Round Robin",
           "strategy_weighted_round_robin": "Weighted Round Robin",
           "strategy_fill_first": "Fill First",
@@ -1396,7 +1397,8 @@
           "disable_cooling_desc": "Globally disable auth/model cooldown windows after failures",
           "session_affinity": "Session Affinity Routing",
           "ws_auth": "WebSocket Authentication",
-          "ws_auth_desc": "Require authentication for AI Studio WebSocket connections (oauth.providers.aistudio.ws-auth)"
+          "ws_auth_desc": "Require authentication for AI Studio WebSocket connections (oauth.providers.aistudio.ws-auth)",
+          "strategy_earliest_reset": "Earliest reset"
         },
         "quota": {
           "title": "Quota Fallback",
@@ -1583,7 +1585,16 @@
     "weekday_wed": "Wed",
     "weekday_thu": "Thu",
     "weekday_fri": "Fri",
-    "weekday_sat": "Sat"
+    "weekday_sat": "Sat",
+    "view_ledger": "Ledger",
+    "view_cards": "Cards",
+    "view_label": "Quota view",
+    "show_emails": "Show emails",
+    "hide_emails": "Hide emails",
+    "weekly_limit": "Weekly limit",
+    "summary_total": "of {{total}}%",
+    "summary_credentials": "{{count}} credentials",
+    "next_reset": "Next reset"
   },
   "plugin_management": {
     "title": "Plugin Management",

@@ -12,7 +12,9 @@ describe('visual config weighted routing strategy', () => {
     expect(parseRoutingStrategy('fill-first')).toBe('fill-first');
     expect(parseRoutingStrategy('fillfirst')).toBe('fill-first');
     expect(parseRoutingStrategy('ff')).toBe('fill-first');
-    expect(parseRoutingStrategy(undefined)).toBe('round-robin');
+    expect(parseRoutingStrategy(undefined)).toBe('earliest-reset');
+    expect(parseRoutingStrategy('earliest-reset')).toBe('earliest-reset');
+    expect(parseRoutingStrategy('round-robin')).toBe('round-robin');
   });
 
   test('writes weighted-round-robin without coercing it to round-robin', () => {

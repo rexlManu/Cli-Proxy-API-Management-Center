@@ -130,6 +130,10 @@ export function SectionNetwork({
                 value={values.routingStrategy}
                 options={[
                   {
+                    value: 'earliest-reset',
+                    label: t('config_management.visual.sections.network.strategy_earliest_reset'),
+                  },
+                  {
                     value: 'round-robin',
                     label: t('config_management.visual.sections.network.strategy_round_robin'),
                   },

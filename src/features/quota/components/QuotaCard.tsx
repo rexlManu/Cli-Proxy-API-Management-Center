@@ -1,12 +1,3 @@
-/**
- * 额度卡片：头部（提供商图标 + mono 文件名）+ 四态 body + 动作 footer。
- *
- * - idle：整个 body 是一个点击加载按钮（上游直连有速率考虑，不自动拉取）；
- * - loading：双幽灵行骨架（aria-busy，文字等价视觉隐藏）；
- * - error：失败色条 + footer 刷新即重试；
- * - success：provider Body（穿 QuotaBody.module.scss 全页外衣）。
- */
-
 import { useState, type CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconRefreshCw } from '@/components/ui/icons';
@@ -25,17 +16,25 @@ import { isQuotaRefreshDisabled, type QuotaFileEntry } from '../logic';
 import { useClaudeResetGrants } from '../providers/claude/ClaudeResetGrants';
 import bodyStyles from './QuotaBody.module.scss';
 import styles from './QuotaCard.module.scss';
+import ledgerStyles from './QuotaLedgerBody.module.scss';
+import { maskQuotaEmail } from '../ledger';
 
-/** 额度页全页外衣：QuotaBody 模块绑定成类型化契约（缺键在模块初始化即抛）。 */
-const quotaClasses = bindQuotaClasses(bodyStyles, 'QuotaBody.module.scss');
+// Provider bodies share a checked CSS class contract.
+const cardClasses = bindQuotaClasses(bodyStyles, 'QuotaBody.module.scss');
+const ledgerClasses = bindQuotaClasses(
+  { ...bodyStyles, ...ledgerStyles },
+  'QuotaLedgerBody.module.scss'
+);
 
 export type QuotaCardProps = {
   entry: QuotaFileEntry;
+  layout?: 'cards' | 'ledger';
+  showEmails?: boolean;
   quota?: QuotaCardState;
   resolvedTheme: ResolvedTheme;
   canRefresh: boolean;
   resetting: boolean;
-  /** 首屏级联入场延迟；null = 不入场（切 tab / 翻页 / 刷新新挂载的卡片）。 */
+  /** Null disables the entrance animation. */
   entranceDelayMs?: number | null;
   onRefresh: () => void;
   onReset: () => void;
@@ -44,6 +43,8 @@ export type QuotaCardProps = {
 export function QuotaCard(props: QuotaCardProps) {
   const {
     entry,
+    layout = 'cards',
+    showEmails = true,
     quota,
     resolvedTheme,
     canRefresh,
@@ -55,9 +56,11 @@ export function QuotaCard(props: QuotaCardProps) {
   const { t } = useTranslation();
   const adapter = QUOTA_ADAPTERS[entry.type];
   const file = entry.file;
-  const displayName = getQuotaDisplayName(file);
+  const name = getQuotaDisplayName(file);
+  const displayName = showEmails ? name : maskQuotaEmail(name);
+  const quotaClasses = layout === 'ledger' ? ledgerClasses : cardClasses;
 
-  // 挂载时捕获一次延迟：后续 props 变 null 不影响本卡（React 19 禁渲染期读 ref）
+  // Capture the entrance delay once per mounted card.
   const [mountEntranceDelayMs] = useState<number | null>(entranceDelayMs ?? null);
   const entranceStyle =
     mountEntranceDelayMs === null
@@ -88,7 +91,7 @@ export function QuotaCard(props: QuotaCardProps) {
 
   return (
     <article
-      className={`${styles.card} ${mountEntranceDelayMs === null ? '' : styles.cardEnter}`}
+      className={`${styles.card} ${layout === 'ledger' ? styles.ledgerRow : ''} ${mountEntranceDelayMs === null ? '' : styles.cardEnter}`}
       style={entranceStyle}
     >
       <header className={styles.head}>
@@ -113,7 +116,7 @@ export function QuotaCard(props: QuotaCardProps) {
       </header>
 
       <div className={styles.body}>
-        {entry.type === 'claude' && status === 'success' && (
+        {entry.type === 'claude' && status === 'success' && layout !== 'ledger' && (
           <>
             <div className={quotaClasses.codexPlan}>
               <span className={quotaClasses.codexPlanItem}>
