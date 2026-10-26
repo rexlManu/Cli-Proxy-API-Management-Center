@@ -16,6 +16,7 @@ import { ProviderTabs } from '@/features/authFiles/components/ProviderTabs';
 import { QuotaHeader } from './components/QuotaHeader';
 import { maskQuotaEmail } from './ledger';
 import { QuotaSummary } from './components/QuotaSummary';
+import { QuotaHistoryPanel } from './components/QuotaHistoryPanel';
 import { getTypeLabel } from '@/features/authFiles/constants';
 import { QuotaCard } from './components/QuotaCard';
 import { QuotaTimeline } from './components/QuotaTimeline';
@@ -361,6 +362,10 @@ export function QuotaPage() {
             quotaFor={getQuota}
             resolvedTheme={resolvedTheme}
           />
+        )}
+
+        {!loading && (tab === 'claude' || tab === 'codex') && (
+          <QuotaHistoryPanel key={sessionGeneration} provider={tab} resolvedTheme={resolvedTheme} />
         )}
 
         {error && (

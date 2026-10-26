@@ -1,0 +1,39 @@
+.wrap {
+  position: relative;
+  overflow-x: auto;
+}
+.svg {
+  display: block;
+  width: 100%;
+  min-width: 600px;
+  height: auto;
+  touch-action: pan-x pan-y;
+}
+.grid {
+  stroke: var(--border-color);
+  stroke-width: 1;
+}
+.tick {
+  fill: var(--text-secondary);
+  font-size: 13px;
+}
+.now {
+  stroke: var(--text-secondary);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+.cursor {
+  stroke-width: 1;
+  opacity: 0.6;
+}
+.readout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  font-size: 13px;
+  max-width: 100%;
+  pointer-events: none;
+}
